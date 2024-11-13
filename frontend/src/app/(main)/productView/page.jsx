@@ -63,11 +63,7 @@ const filters = [
   },
 ]
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
-const productView = () => {
+const ProductView = () => {
 
   const router = useRouter();
   const [productList, setProductList] = useState([]);
@@ -518,4 +514,4 @@ const productView = () => {
   );
 };
 
-export default productView;
+export default ProductView;

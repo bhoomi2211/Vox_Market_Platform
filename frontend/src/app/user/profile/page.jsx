@@ -3,7 +3,7 @@ import { data } from "autoprefixer";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 
-const userProfile = () => {
+const UserProfile = () => {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(sessionStorage.getItem("user"))
   );
@@ -117,4 +117,4 @@ const userProfile = () => {
   );
 };
 
-export default userProfile;
+export default UserProfile;

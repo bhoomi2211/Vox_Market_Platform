@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import Link from 'next/link';
 import React, { useState } from 'react'
 
-const editPofile = () => {
+const EditPofile = () => {
 
   const [currentUser, setCurrentUSer ] = useState(
     JSON.parse(sessionStorage.getItem("user"))
@@ -204,4 +204,4 @@ const deleteAccount = async (id) => {
   )
 }
 
-export default editPofile;
+export default EditPofile;

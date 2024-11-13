@@ -358,7 +358,7 @@ const Addproduct = () => {
             </div>
 
             {features.map(({ name, value }, index) => (
-              <div className='form-group grid cols-2'>
+              <div key={index} className='form-group grid cols-2'>
                 <label htmlFor="">
                   Product Feature
                 </label>

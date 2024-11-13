@@ -77,7 +77,7 @@ const CartPage = () => {
       <div className="text-center">
         {/* <p alt="login form" className='rounded-start mt-4 w-25 text-center' /> */}
         <h3>Your Cart is Currently Empty!</h3>
-        <p className="text-muted">Before proceed to checkout you must add some products to your shopping cart. <br />You will fill a lot of interesting products on our "Product" page.</p>
+        <p className="text-muted">Before proceed to checkout you must add some products to your shopping cart. <br />You will fill a lot of interesting products on our &quot;Product&quot; page.</p>
         <Link className="btn rounded-pill" onClick={() => setCartOpen(false)} style={{ backgroundColor: "#4BCCF2", color: "#fff" }} href={"/productView"}>Return To Shop</Link>
       </div>
     );

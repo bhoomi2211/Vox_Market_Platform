@@ -61,7 +61,7 @@ const About = () => {
       <div className=" max-w-2xl p-8 bg-purple-50 shadow-md rounded-md">
         <h1 className="text-2xl font-bold mb-4">Voice-activated shopping: making your experience more intuitive and effortless..</h1>
         <p className="mb-4">
-        "Welcome to VOX - MARKET, the innovative platform where you can explore and purchase a vast collection of digital content using just your voice!"
+        &quot;Welcome to VOX - MARKET, the innovative platform where you can explore and purchase a vast collection of digital content using just your voice!&quot;
         </p>
         
       </div>

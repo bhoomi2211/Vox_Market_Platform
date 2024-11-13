@@ -111,8 +111,8 @@ const ManageProduct = () => {
                   </td>
                   <td className="p-4 border gray-200">
                     <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                      {order.items.map((item) => (
-                        <div>
+                      {order.items.map((item, index) => (
+                        <div key={index}>
                             {item.pname}
                         </div>
                       ))}
