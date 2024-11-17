@@ -33,7 +33,7 @@ const Home = () => {
             }}
 
             modules={[Autoplay, Pagination]}
-            className="mySwiper h-96 w-full "
+            className="mySwiper h-[70vh] w-full "
           >
             <SwiperSlide style={{ backgroundSize: "cover" }} className="bg-[url('https://wallpaperaccess.com/full/1448067.jpg')]"></SwiperSlide>
 
