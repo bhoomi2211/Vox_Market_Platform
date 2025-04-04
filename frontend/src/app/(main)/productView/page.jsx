@@ -210,103 +210,120 @@ const ProductView = () => {
   }
 
   const displayProducts = () => {
-    return <section className="container mx-auto p-5 md:py-5 px-0 md:p-8 md:px-0">
-      <section className="p-2 md:p-0 grid grid-cols-1  sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-10 items-start ">
-        {productList.length > 0 ?
-          productList.map((product, index) => {
-            return <div key={product._id} className="relative m-10  flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-purple-50 shadow-md">
-              <Link
-                className="relative mx-3 mt-3 flex h-60 overflow-hidden  rounded-xl"
-                href={"/productDetail/" + product._id}
-              >
-                <img
-                  className="object-contain block m-auto h-60 w-full"
-                  src={`${process.env.NEXT_PUBLIC_API_URL}/${product.images[0]}`}
-                  alt={product.pname}
-                />
-                <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
-                  Product No. {index + 1}
-                </span>
-              </Link>
-              <div className="mt-4 px-5 pb-5">
-                <a href="#">
-                  <h5 className="text-xl tracking-tight text-slate-900">
-                    {product.pname}
-                  </h5>
-                  <span className="text-slate-700 mt-3">{
-                    sliceText(product.pdetail, 90)
-                  }</span>
-                </a>
-                <p className="mt-5">Sold by : {product.seller.fname} {product.seller.lname}</p>
-                <div className="mt-2 mb-5 flex items-center justify-between">
-                  <p>
-                    <span className="text-3xl font-bold text-slate-900">₹{product.pprice}</span>
-                    {/* <span className="text-sm text-slate-900 line-through">$699</span> */}
-                  </p>
-                  <div className="flex items-center">
-                    <svg
-                      aria-hidden="true"
-                      className="h-5 w-5 text-yellow-300"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                    <svg
-                      aria-hidden="true"
-                      className="h-5 w-5 text-yellow-300"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                    <svg
-                      aria-hidden="true"
-                      className="h-5 w-5 text-yellow-300"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                    <svg
-                      aria-hidden="true"
-                      className="h-5 w-5 text-yellow-300"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                    <svg
-                      aria-hidden="true"
-                      className="h-5 w-5 text-yellow-300"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                    <span className="mr-2 ml-3 rounded bg-yellow-200 px-2.5 py-0.5 text-xs font-semibold">
-                      5.0
+    return <>
+      <div className="bg-white py-6 sm:py-8 lg:py-12">
+        <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
+          {/* text - start */}
+          <div className="mb-10 md:mb-16">
+            <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
+              Selected
+            </h2>
+            <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+              This is a section of some simple filler text, also known as placeholder
+              text. It shares some characteristics of a real written text but is
+              random or otherwise generated.
+            </p>
+          </div>
+          {/* text - end */}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {productList.length > 0 ?
+              productList.map((product, index) => (
+                <div>
+                  <Link
+                    href={"/productDetail/" + product._id}
+                    className="group relative block h-84 overflow-hidden rounded-t-lg bg-gray-100"
+                  >
+                    <img
+                      loading="lazy"
+                      src={`${process.env.NEXT_PUBLIC_API_URL}/${product.images[0]}`}
+                      alt={product.pname}
+                      className="h-64 w-full object-contain object-center transition duration-200 group-hover:scale-110"
+                    />
+                    <span className="absolute left-0 top-3 rounded-r-lg bg-red-500 px-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-white">
+                      Product No. {index + 1}
                     </span>
+                  </Link>
+                  <div className="flex items-start justify-between gap-2 rounded-b-lg bg-gray-100 p-4">
+                    <div className="flex flex-col">
+                      <Link
+                        href={"/productDetail/" + product._id}
+                        className="font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-lg"
+                      >
+                        {product.pname}
+                      </Link>
+                      <div className="flex items-center">
+                        <svg
+                          aria-hidden="true"
+                          className="h-5 w-5 text-yellow-300"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg
+                          aria-hidden="true"
+                          className="h-5 w-5 text-yellow-300"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg
+                          aria-hidden="true"
+                          className="h-5 w-5 text-yellow-300"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg
+                          aria-hidden="true"
+                          className="h-5 w-5 text-yellow-300"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <svg
+                          aria-hidden="true"
+                          className="h-5 w-5 text-yellow-300"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                        <span className="mr-2 ml-3 rounded bg-yellow-200 px-2.5 py-0.5 text-xs font-semibold">
+                          5.0
+                        </span>
+                      </div>
+                      <span className="text-sm text-gray-500 lg:text-base">
+                        sold by {product.seller.fname} {product.seller.lname}
+                      </span>
+                      <button disabled={isInCart(product)} onClick={e => addItemToCart(product)} className="mt-5 block w-full rounded bg-indigo-500 px-8 py-2 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base">
+                        <IconShoppingCart className="inline" /> {isInCart(product) ? 'Already Added' : 'Add to Cart'}
+                      </button>
+                    </div>
+                    <div className="flex flex-col items-end">
+                      <span className="font-bold text-gray-600 lg:text-xl">₹{product.pprice}</span>
+                      {/* <span className="text-sm text-red-500 line-through">$39.99</span> */}
+                    </div>
                   </div>
                 </div>
-                <button disabled={isInCart(product)} onClick={e => addItemToCart(product)} className='my-2 bg-green-600 hover:bg-green-700 py-2 px-5 text-white block w-full rounded' >
-                  <IconShoppingCart className="inline" /> {isInCart(product) ? 'Already Added' : 'Add to Cart'}
-                </button>
-              </div>
-            </div>
+              )) : (
+                <div className="text-center text-3xl font-bold text-red-300 my-48">No Products Found</div>
+              )
+            }
 
+          </div>
+        </div>
+      </div>
 
-          }) : (
-            <div className="text-center text-3xl font-bold text-red-300 my-48">No Products Found</div>
-          )
-        }
-      </section>
-    </section>
+    </>
   }
 
   return (
@@ -452,12 +469,12 @@ const ProductView = () => {
                       }} href={category.href}>{category.name}</a>
                     </li>
                   ))}
-                    <li>
-                      <a href="#" onClick={e => {
-                        e.preventDefault();
-                        fetchProductData();
-                      }}>Reset Filter</a>
-                    </li>
+                  <li>
+                    <a href="#" onClick={e => {
+                      e.preventDefault();
+                      fetchProductData();
+                    }}>Reset Filter</a>
+                  </li>
                 </ul>
 
                 {/* {filters.map((section) => (

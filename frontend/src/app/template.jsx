@@ -4,6 +4,7 @@ import { CartProvider } from "@/context/CartContext";
 import { SellerProvider } from "@/context/SellerContext";
 import { VoiceProvider } from "@/context/VoiceContext";
 import React from "react";
+import PrelineScript from "./PrelineScript";
 
 const Template = ({ children }) => {
   return (
@@ -11,6 +12,7 @@ const Template = ({ children }) => {
       <CartProvider>
         <SellerProvider>
           <AppProvider>
+            <PrelineScript />
             {children}
           </AppProvider>
         </SellerProvider>
