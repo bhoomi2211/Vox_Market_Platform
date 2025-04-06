@@ -34,16 +34,14 @@ const Home = () => {
                   <div className="hs-carousel-slide">
                     <div className="h-120 md:h-[calc(100vh-106px)]  flex flex-col bg-[url('https://images.unsplash.com/photo-1615615228002-890bb61cac6e?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center bg-no-repeat">
                       <div className="mt-auto w-2/3 md:max-w-lg ps-5 pb-5 md:ps-10 md:pb-10">
-                        <span className="block text-white">Nike React</span>
+                        <span className="block text-white">Trending Now</span>
                         <span className="block text-white text-xl md:text-3xl">
-                          Rewriting sport's playbook for billions of athletes
+                          Discover Exclusive Deals from Top Sellers
                         </span>
                         <div className="mt-5">
-                          <a
-                            className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl bg-white border border-transparent text-black hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
-                            href="#"
-                          >
-                            Read Case Studies
+                          <a className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl bg-white border border-transparent text-black hover:bg-gray-100"
+                            href="/products">
+                            Shop Now
                           </a>
                         </div>
                       </div>
@@ -138,26 +136,6 @@ const Home = () => {
               {/* End Arrows */}
             </div>
           </div>
-          {/* <Swiper
-            spaceBetween={30}
-            centeredSlides={true}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
-            pagination={{
-              clickable: true,
-            }}
-
-            modules={[Autoplay, Pagination]}
-            className="mySwiper h-[70vh] w-full "
-          >
-            <SwiperSlide style={{ backgroundSize: "cover" }} className="bg-[url('https://wallpaperaccess.com/full/1448067.jpg')]"></SwiperSlide>
-
-            <SwiperSlide style={{ backgroundSize: "cover" }} className="bg-[url('https://cdn.thecoolist.com/wp-content/uploads/2021/05/Men-clothing-websites.jpg')]"></SwiperSlide>
-            <SwiperSlide style={{ backgroundSize: "cover" }} className=" bg-[url('https://wallpaperaccess.com/full/5633830.jpg')]"></SwiperSlide>
-
-          </Swiper> */}
         </section>
 
         <>
@@ -168,12 +146,11 @@ const Home = () => {
               {/* text - start */}
               <div className="mb-10 md:mb-16">
                 <h2 className="mb-4 text-center text-2xl font-bold md:mb-6 lg:text-3xl">
-                  Selected
+                  Featured Products
                 </h2>
-                <p className="mx-auto max-w-screen-md text-center md:text-lg">
-                  This is a section of some simple filler text, also known as
-                  placeholder text. It shares some characteristics of a real written
-                  text but is random or otherwise generated.
+                <p className="mx-auto max-w-screen-md text-center text-gray-300 md:text-lg">
+                  Explore our handpicked selection of top-rated products from trusted sellers. 
+                  From electronics to fashion, find the best deals across all categories.
                 </p>
               </div>
               {/* text - end */}
@@ -314,21 +291,17 @@ const Home = () => {
                 {/* content - start */}
                 <div className="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-2/5">
                   <h2 className="mb-4 text-xl font-bold text-white md:text-2xl lg:text-4xl">
-                    Summer Sale
-                    <br />
-                    Up to 70% off.
+                    Flash Sale!<br />
+                    Up to 70% off
                   </h2>
                   <p className="mb-8 max-w-md text-gray-400">
-                    This is a section of some simple filler text, also known as
-                    placeholder text. It shares some characteristics of a real written
-                    text.
+                    Don't miss out on incredible deals across all categories. 
+                    Limited time offers from our verified sellers. Shop now and save big!
                   </p>
                   <div className="mt-auto">
-                    <a
-                      href="#"
-                      className="inline-block rounded-lg bg-blue-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base"
-                    >
-                      Save now
+                    <a href="/flash-sale"
+                      className="inline-block rounded-lg bg-blue-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none hover:bg-blue-600">
+                      View Deals
                     </a>
                   </div>
                 </div>
@@ -351,7 +324,7 @@ const Home = () => {
           <div className="bg-[#1d232a] py-6 sm:py-8 lg:py-12">
             <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
               <h2 className="mb-8 text-center text-2xl font-bold text-white md:mb-12 lg:text-3xl">
-                Collections
+                Popular Categories
               </h2>
               <div className="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
                 {/* product - start */}
@@ -361,15 +334,15 @@ const Home = () => {
                     className="group relative flex h-96 items-end overflow-hidden rounded-lg bg-gray-100 p-4 shadow-lg"
                   >
                     <img
-                      src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&q=75&fit=crop&crop=top&w=600&h=700"
+                      src="electronics-image-url"
                       loading="lazy"
-                      alt="Photo by Austin Wade"
+                      alt="Electronics"
                       className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
                     />
                     <div className="relative flex w-full flex-col rounded-lg bg-[#1d232a] p-4 text-center">
-                      <span className="text-gray-500">Men</span>
+                      <span className="text-gray-500">Electronics</span>
                       <span className="text-lg font-bold text-white lg:text-xl">
-                        Business Causual
+                        Gadgets & Tech
                       </span>
                     </div>
                   </a>
@@ -382,15 +355,15 @@ const Home = () => {
                     className="group relative flex h-96 items-end overflow-hidden rounded-lg bg-gray-100 p-4 shadow-lg"
                   >
                     <img
-                      src="https://images.unsplash.com/photo-1603344797033-f0f4f587ab60?auto=format&q=75&fit=crop&crop=top&w=600&h=700"
+                      src="fashion-image-url"
                       loading="lazy"
-                      alt="Photo by engin akyurt"
+                      alt="Fashion"
                       className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
                     />
                     <div className="relative flex w-full flex-col rounded-lg bg-[#1d232a] p-4 text-center">
-                      <span className="text-gray-500">Women</span>
+                      <span className="text-gray-500">Fashion</span>
                       <span className="text-lg font-bold text-white lg:text-xl">
-                        Summer Season
+                        Trending Styles
                       </span>
                     </div>
                   </a>
@@ -403,15 +376,15 @@ const Home = () => {
                     className="group relative flex h-96 items-end overflow-hidden rounded-lg bg-gray-100 p-4 shadow-lg"
                   >
                     <img
-                      src="https://images.unsplash.com/photo-1552668693-d0738e00eca8?auto=format&q=75&fit=crop&crop=top&w=600&h=700"
+                      src="home-image-url"
                       loading="lazy"
-                      alt="Photo by Austin Wade"
+                      alt="Home & Living"
                       className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
                     />
                     <div className="relative flex w-full flex-col rounded-lg bg-[#1d232a] p-4 text-center">
-                      <span className="text-gray-500">Men</span>
+                      <span className="text-gray-500">Home & Living</span>
                       <span className="text-lg font-bold text-white lg:text-xl">
-                        Streetwear
+                        Decor & Essentials
                       </span>
                     </div>
                   </a>
@@ -424,15 +397,15 @@ const Home = () => {
                     className="group relative flex h-96 items-end overflow-hidden rounded-lg bg-gray-100 p-4 shadow-lg"
                   >
                     <img
-                      src="https://images.unsplash.com/photo-1560269999-cef6ebd23ad3?auto=format&q=75&fit=crop&w=600&h=700"
+                      src="beauty-image-url"
                       loading="lazy"
-                      alt="Photo by Austin Wade"
+                      alt="Beauty & Care"
                       className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
                     />
                     <div className="relative flex w-full flex-col rounded-lg bg-[#1d232a] p-4 text-center">
-                      <span className="text-gray-500">Women</span>
+                      <span className="text-gray-500">Beauty & Care</span>
                       <span className="text-lg font-bold text-white lg:text-xl">
-                        Sale
+                        Self Care
                       </span>
                     </div>
                   </a>

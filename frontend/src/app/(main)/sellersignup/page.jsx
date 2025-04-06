@@ -40,14 +40,14 @@ const SignUpSeller = () => {
   return (
     <>
       <div
-        className="container-fluid flex items-center justify-center bg-purple-50"
-        style={{ height: "100vh" }}
+        className="container-fluid flex items-center justify-center bg-white"
+        style={{ height: "90vh" }}
       >
         <div className=" w-3/4 --tw-shadow-color: #000;">
           <div className="grid grid-cols-2 h-3/4">
-            <div className="w-full h-auto">
+            <div className="w-full h-auto my-auto">
               <img
-                src="https://www.pngplay.com/wp-content/uploads/6/E-Commerce-Shopping-PNG-Clipart-Background.png"
+                src="/seller-login-hero.avif"
                 alt=""
                 className="px-5 py-4 "
               />
