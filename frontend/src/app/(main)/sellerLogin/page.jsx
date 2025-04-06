@@ -50,14 +50,14 @@ const Sellerlogin = () => {
       {/* component */}
       {/* Container */}
       <div
-        className="container-fluid flex items-center justify-center bg-purple-50"
-        style={{ height: "100vh" }}
+        className="container-fluid flex items-center justify-center bg-white"
+        style={{ height: "90vh" }}
       >
         <div className=" w-3/4 --tw-shadow-color: #000;  ">
           <div className="grid grid-cols-2 h-3/4">
             <div className="">
               <img
-                src="https://www.pngplay.com/wp-content/uploads/6/E-Commerce-Shopping-PNG-Clipart-Background.png"
+                src={"/seller-login-hero.avif"}
                 alt=""
                 className="px-5 py-4 "
               />
@@ -130,7 +130,7 @@ const Sellerlogin = () => {
                   </div>
                   <div className="text-sm mt-8 text-center">
                     <a
-                      href="/seller/sellersignup"
+                      href="/sellersignup"
                       className="font-semibold  hover:text-[#D4A056]-500 text-[#FC9B3C] "
                     >
                       Yet not register? Register Here!
