@@ -389,7 +389,7 @@ export const VoiceProvider = ({ children }) => {
       SpeechRecognition.startListening({ continuous: true });
       triggerModal('Voice Assistant', 'I am listening');
     }
-    if (finalTranscript.includes('top listening')) {
+    if (finalTranscript.includes('stop listening')) {
       voiceResponse('Okay, I will stop listening now');
       SpeechRecognition.stopListening();
       triggerModal('Voice Assistant', 'Good Bye! Have a nice day!', false, <IconMicrophoneOff size={50} />);
