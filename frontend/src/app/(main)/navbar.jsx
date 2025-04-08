@@ -34,22 +34,18 @@ const Navbar = () => {
           <section className="relative mx-auto">
             {/* navbar */}
             <nav className="flex justify-between  text-white w-screen bg-[#1E2852] ">
-              <div className="px-5 xl:px-12 py-2 flex w-full items-center ">
-                <Link className="text-3xl font-bold font-heading" href="/">
-                  <div className=" ">
-                    <img src="vox-market (3).png" alt="" className="h-16" />
-                  </div>
+              <div className="px-5 xl:px-12 py-6 flex w-full items-center ">
+                <Link className="text-3xl font-bold font-subheading" href="/">
+                  <h3 className=" ">
+                    {/* <img src="vox-market (3).png" alt="" className="h-16" /> */}
+                    <span className="text-[#8C52FF]">VOX</span> Market
+                  </h3>
                 </Link>
                 {/* Nav Links */}
                 <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
                   <li>
                     <Link className="hover:text-gray-200" href="/">
                       Home
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="hover:text-gray-200" href="#">
-                      Category
                     </Link>
                   </li>
                   <li>
@@ -65,7 +61,7 @@ const Navbar = () => {
                 </ul>
 
                 {/* Header Icons */}
-                <div className="hidden xl:flex items-center space-x-5 items-center">
+                <div className="hidden xl:flex items-center space-x-5">
                   <>
                     <Link
                       className="flex items-center hover:text-gray-200"

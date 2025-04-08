@@ -384,12 +384,20 @@ export const VoiceProvider = ({ children }) => {
 
 
   useEffect(() => {
+    if (finalTranscript === 'hello vox' || finalTranscript.includes('hello')) {
+      resetTranscript();
+      voiceResponse('Hi there, How can I help you?');
+      SpeechRecognition.startListening({ continuous: true });
+      triggerModal('Voice Assistant', 'Hi User, How can I help you?');
+    }
     if (finalTranscript === 'start listening') {
+      resetTranscript();
       voiceResponse('I am listening');
       SpeechRecognition.startListening({ continuous: true });
       triggerModal('Voice Assistant', 'I am listening');
     }
     if (finalTranscript.includes('top listening')) {
+      resetTranscript();
       voiceResponse('Okay, I will stop listening now');
       SpeechRecognition.stopListening();
       triggerModal('Voice Assistant', 'Good Bye! Have a nice day!', false, <IconMicrophoneOff size={50} />);
@@ -514,25 +522,30 @@ export const VoiceProvider = ({ children }) => {
       checkExistenceInTranscript
     }}>
 
-      <div className='bg-[#8C52FF] text-white text-center'>
-        <button className='floating-mic ' onClick={() => {
-          if (listening) {
-            SpeechRecognition.stopListening();
-          } else {
-            SpeechRecognition.startListening();
-          }
-        }}>{listening ?
-          (
-            <span >
-              <IconPlayerRecordFilled style={{ display: 'inline', color: 'white' }} color='#f00' /> listening... {transcript}
-            </span>
+      <div className='fixed bottom-6 right-6 flex flex-col items-end gap-2 z-50'>
+        <button 
+          className='w-12 h-12 rounded-full bg-[#8C52FF] text-white shadow-lg hover:bg-[#7340d3] transition-all duration-200 flex items-center justify-center'
+          onClick={() => {
+            if (listening) {
+              SpeechRecognition.stopListening();
+            } else {
+              SpeechRecognition.startListening();
+            }
+          }}
+        >
+          {listening ? (
+            <IconPlayerRecordFilled size={24} style={{ color: 'white' }} />
           ) : (
-            <span className='text-xl'><FaMicrophone /></span>
-          )}</button>
-        {/* <p>Microphone: </p> */}
-        {/* <button onClick={SpeechRecognition.startListening}>Start</button>
-      <button onClick={SpeechRecognition.stopListening}>Stop</button>
-      <button onClick={resetTranscript}>Reset</button> */}
+            <FaMicrophone size={20} />
+          )}
+        </button>
+        
+        {/* Transcript display */}
+        {listening && transcript && (
+          <div className='bg-[#8C52FF]/90 text-white px-4 py-2 rounded-lg max-w-xs text-sm backdrop-blur-sm'>
+            {transcript}
+          </div>
+        )}
       </div>
 
       {children}
