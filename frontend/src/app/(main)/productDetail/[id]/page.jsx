@@ -2,6 +2,7 @@
 import useCartContext from "@/context/CartContext";
 import useVoiceContext from "@/context/VoiceContext";
 import { IconShoppingCartCopy } from "@tabler/icons-react";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
@@ -98,21 +99,27 @@ const ProductDetail = () => {
   const ratingForm = () => {
     if (currentUser !== null) {
       return (
-        <div>
+        <div className="my-6">
           <StarRatings
             rating={rating}
-            starRatedColor="blue"
+            starRatedColor="#6366f1"
             changeRating={setRating}
             numberOfStars={5}
           />
           <div >
-            <textarea className="border border-black pt-3" ref={reviewRef}></textarea>
+            <textarea className="border border-black bg-white p-3 my-4 w-full rounded-lg" ref={reviewRef}></textarea>
           </div>
           <button
-            className=" text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded"
+            className=" inline-block flex-1 rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base"
             onClick={submitReview}>Submit</button>
         </div>
 
+      );
+    }else{
+      return (
+        <div className="my-6">
+          <h1 className="text-red-500">Please login to add a review</h1>
+        </div>
       );
     }
   };
@@ -304,7 +311,7 @@ const ProductDetail = () => {
     }
   };
 
-  if(productDetails === null){
+  if (productDetails === null) {
     return <p>Loading ...</p>;
   }
 
@@ -315,7 +322,7 @@ const ProductDetail = () => {
           <div className="grid gap-8 md:grid-cols-2">
             {/* images - start */}
             <div className="grid gap-4 lg:grid-cols-5">
-              <div className="order-last flex gap-4 lg:order-none lg:flex-col">
+              {/* <div className="order-last flex gap-4 lg:order-none lg:flex-col">
                 <div className="overflow-hidden rounded-lg bg-gray-100">
                   <img
                     src="https://images.unsplash.com/flagged/photo-1571366992791-2ad2078656cb?auto=format&q=75&fit=crop&w=250"
@@ -340,13 +347,13 @@ const ProductDetail = () => {
                     className="h-full w-full object-cover object-center"
                   />
                 </div>
-              </div>
-              <div className="relative overflow-hidden rounded-lg bg-gray-100 lg:col-span-4">
+              </div> */}
+              <div className="relative overflow-hidden rounded-lg  lg:col-span-4">
                 <img
                   src={"http://localhost:5000/" + productDetails.images[0]}
                   loading="lazy"
-                  alt="Photo by Himanshu Dewangan"
-                  className="h-full w-full object-cover object-center"
+                  alt={productDetails.pname}
+                  className="w-full object-cover object-center"
                 />
                 <span className="absolute left-0 top-0 rounded-br-lg bg-red-500 px-3 py-1.5 text-sm uppercase tracking-wider text-white">
                   sale
@@ -377,7 +384,7 @@ const ProductDetail = () => {
             <div className="md:py-8">
               {/* name - start */}
               <div className="mb-2 md:mb-3">
-                <span className="mb-0.5 inline-block text-gray-500">Fancy Brand</span>
+                <span className="mb-0.5 inline-block text-gray-500">Brand Name</span>
                 <h2 className="text-2xl font-bold text-gray-800 lg:text-3xl">
                   {productDetails.pname}
                 </h2>
@@ -461,11 +468,11 @@ const ProductDetail = () => {
               <div className="mb-4">
                 <div className="flex items-end gap-2">
                   <span className="text-xl font-bold text-gray-800 md:text-2xl">
-                    $15.00
+                    ₹{productDetails.pprice}
                   </span>
-                  <span className="mb-0.5 text-red-500 line-through">$30.00</span>
+                  <span className="mb-0.5 text-red-500 line-through">₹{parseInt(productDetails.pprice + productDetails.pprice * 0.3)}</span>
                 </div>
-                <span className="text-sm text-gray-500">incl. VAT plus shipping</span>
+                <span className="text-sm text-gray-500">incl. GST plus shipping</span>
               </div>
               {/* price - end */}
               {/* shipping notice - start */}
@@ -490,19 +497,23 @@ const ProductDetail = () => {
               {/* shipping notice - end */}
               {/* buttons - start */}
               <div className="flex gap-2.5">
-                <a
-                  href="#"
+                <button
+                  disabled={isInCart(productDetails)}
+                  onClick={() => {
+                    addItemToCart(productDetails);
+                  }}
                   className="inline-block flex-1 rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base"
                 >
-                  Add to cart
-                </a>
-                <a
-                  href="#"
+                  {isInCart(productDetails) ? "Already In Cart" : "Add to Cart"}
+                </button>
+                <Link
+                  href="/user/checkout"
                   className="inline-block rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base"
                 >
                   Buy now
-                </a>
+                </Link>
               </div>
+              {ratingForm()}
               {/* buttons - end */}
             </div>
             {/* content - end */}
@@ -510,9 +521,9 @@ const ProductDetail = () => {
         </div>
       </div>
 
-      <section className="text-gray-700 body-font overflow-hidden bg-white">
+      {/* <section className="text-gray-700 body-font overflow-hidden bg-white">
         {displayProduct()}
-      </section>
+      </section> */}
     </>
   );
 };

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const SellerNavBar = () => {
@@ -16,29 +17,24 @@ const SellerNavBar = () => {
                 {/* Nav Links */}
                 <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
                   <li>
-                    <a className="hover:text-gray-200" href="/">
+                    <Link className="hover:text-gray-200" href="/">
                       Home
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="hover:text-gray-200" href="#">
-                      Category
-                    </a>
-                  </li>
-                  <li>
-                    <a className="hover:text-gray-200" href="/productView">
+                    <Link className="hover:text-gray-200" href="/productView">
                       Collections
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="hover:text-gray-200" href="/contact">
+                    <Link className="hover:text-gray-200" href="/contact">
                       Contact Us
-                    </a>
+                    </Link>
                   </li>
                 </ul>
 
                 {/* Header Icons */}
-                <div className="hidden xl:flex items-center space-x-5 items-center">
+                <div className="hidden xl:flex items-center space-x-5">
                   <>
                     
                     {/* Dropdown menu */}

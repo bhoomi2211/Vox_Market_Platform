@@ -132,7 +132,7 @@ const CheckOut = () => {
 
   return (
     <>
-      <>
+      <div className="bg-white min-h-screen text-black">
         <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
           <a href="#" className="text-2xl font-bold text-gray-800">
             Checkout
@@ -242,7 +242,7 @@ const CheckOut = () => {
             <form className="mt-5 grid gap-6">
               <div className="relative">
                 <input
-                  className="peer hidden"
+                  className="peer hidden bg-white"
                   id="radio_1"
                   type="radio"
                   name="radio"
@@ -286,7 +286,7 @@ const CheckOut = () => {
                   type="text"
                   id="email"
                   ref={emailRef}
-                  className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full bg-white rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="your.email@gmail.com"
                 />
                 <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
@@ -317,7 +317,7 @@ const CheckOut = () => {
                   type="text"
                   id="card-holder"
                   name="card-holder"
-                  className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full bg-white rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Your full name here"
                 />
                 <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
@@ -349,7 +349,7 @@ const CheckOut = () => {
                     type="text"
                     id="billing-address"
                     ref={addressRef}
-                    className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                    className="w-full bg-white rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                     placeholder="Street Address"
                   />
                   <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
@@ -363,7 +363,7 @@ const CheckOut = () => {
                 <select
                   type="text"
                   name="billing-state"
-                  className="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full bg-white rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="State">State</option>
                 </select>
@@ -371,7 +371,7 @@ const CheckOut = () => {
                   type="text"
                   name="billing-zip"
                   ref={pincodeRef}
-                  className="flex-shrink-0 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none sm:w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                  className="flex-shrink-0 bg-white rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none sm:w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="ZIP"
                 />
               </div>
@@ -408,7 +408,7 @@ const CheckOut = () => {
             }
           </div>
         </div>
-      </>
+      </div>
     </>
   );
 };
