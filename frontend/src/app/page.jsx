@@ -14,16 +14,22 @@ import Link from "next/link";
 import VortexSection from "./VortexSection";
 import VoiceCommandsCard from "./VoiceCommandCard";
 
+const commands = [
+  { command: "Hey VOX", description: "Wake up the assistant" },
+  { command: "Browse products", description: "View all products" },
+  { command: "Scroll up/down", description: "Navigate the page" },
+  { command: "Move to top/bottom", description: "Jump to page extremes" },
+  { command: "Search for [item]", description: "Search specific items" },
+  { command: "Show categories", description: "View product categories" }
+];
+
 const Home = () => {
   return (
     <div className="bg-black">
 
       <Navbar />
         <VortexSection />
-      
-
         <>
-
           {/* product-grid - start */}
           <div className="bg-black dark:text-white py-6 sm:py-8 lg:py-12">
             <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
@@ -300,7 +306,7 @@ const Home = () => {
           </div>
           {/* collections - end */}
         </>
-      <VoiceCommandsCard />
+      <VoiceCommandsCard commands={commands} />
       <Footer />
     </div>
   );
