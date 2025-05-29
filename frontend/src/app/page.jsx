@@ -16,11 +16,11 @@ import VoiceCommandsCard from "./VoiceCommandCard";
 
 const commands = [
   { command: "Hey VOX", description: "Wake up the assistant" },
-  { command: "Browse products", description: "View all products" },
+  { command: "Start Listening", description: "Wake up the assistant" },
+  { command: "I want to buy something", description: "View all products" },
   { command: "Scroll up/down", description: "Navigate the page" },
   { command: "Move to top/bottom", description: "Jump to page extremes" },
-  { command: "Search for [item]", description: "Search specific items" },
-  { command: "Show categories", description: "View product categories" }
+  { command: "Search for [item]", description: "Search specific items" }
 ];
 
 const Home = () => {

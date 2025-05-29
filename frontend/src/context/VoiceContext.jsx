@@ -226,7 +226,7 @@ export const VoiceProvider = ({ children }) => {
       command: 'open check out page',
       callback: (pageName) => {
         console.log('Opening page: ', pageName);
-        voicePageNavigator('cheakout')
+        voicePageNavigator('checkout')
       }
     },
    
@@ -318,6 +318,7 @@ export const VoiceProvider = ({ children }) => {
         voicePageNavigator('profile')
       }
     },
+
     
     {
       command: 'open cart',
@@ -527,7 +528,7 @@ export const VoiceProvider = ({ children }) => {
     const voices = synth.getVoices();
     setVoices(voices);
     console.log(voices);
-    speech.voice = voices[5];
+    speech.voice = voices[7];
   }
 
   const checkExistenceInTranscript = (commandArray) => {

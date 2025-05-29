@@ -66,11 +66,14 @@ const filters = [
 
 const commands = [
   { command: "Hey VOX", description: "Wake up the assistant" },
-  { command: "Browse products", description: "View all products" },
+  { command: "I want to buy something", description: "View all products" },
   { command: "Scroll up/down", description: "Navigate the page" },
   { command: "Move to top/bottom", description: "Jump to page extremes" },
   { command: "Search for [item]", description: "Search specific items" },
-  { command: "Show categories", description: "View product categories" }
+  { command:"Open sign up page", description:"Navigate sign up page"},
+  { command:"Open login page", description: "Navigate log in page"}
+  
+
 ];
 
 const ProductView = () => {
@@ -315,7 +318,7 @@ const ProductView = () => {
                         sold by {product.seller.fname} {product.seller.lname}
                       </span>
                       <button disabled={isInCart(product)} onClick={e => addItemToCart(product)} className="mt-5 block w-full rounded bg-indigo-500 px-8 py-2 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base">
-                        <IconShoppingCart className="inline" /> {isInCart(product) ? 'Already Added' : 'Add to Cart'}
+                        <IconShoppingCart className="inline" /> {isInCart(product) ? 'Already Added' : 'Add to Cart' || "Add two Cart" || "Add too Cart" || "At to cart" || "At two Cart" } 
                       </button>
                     </div>
                     <div className="flex flex-col items-end">

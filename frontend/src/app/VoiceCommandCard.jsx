@@ -30,7 +30,7 @@ const VoiceCommandsCard = ({commands}) => {
         </button>
         
         <div className={`transition-all duration-300 ${
-          isExpanded ? 'max-h-96' : 'max-h-0'
+          isExpanded ? 'max-h-[70vh]' : 'max-h-0'
         } overflow-hidden`}>
           <div className="p-4 space-y-3">
             {commands.map((cmd, index) => (
