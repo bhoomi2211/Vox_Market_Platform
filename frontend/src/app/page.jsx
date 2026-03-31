@@ -397,7 +397,7 @@ const Home = () => {
       </section>
 
       {/* ── Voice Commands Card ── */}
-      <VoiceCommandsCard />
+      {/* <VoiceCommandsCard /> */}
 
       <Footer />
     </div>
