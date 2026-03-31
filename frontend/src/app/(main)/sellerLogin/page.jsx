@@ -1,149 +1,96 @@
 "use client";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import React from "react";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import AuthLayout, { Field, Input, SubmitBtn } from "@/components/AuthLayout";
 import useSellerContext from "@/context/SellerContext";
+import { useFormik } from "formik";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import * as Yup from "yup";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
-const Sellerlogin = () => {
-  const addSellerSchema = Yup.object().shape({});
+const sellerLoginSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string().required("Password is required"),
+});
+
+const SellerLogin = () => {
   const router = useRouter();
-
   const { setSellerLoggedIn } = useSellerContext();
+  const [showPw, setShowPw] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const addSellerForm = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    onSubmit: async (values, action) => {
-      console.log(values);
-
-      const res = await fetch("http://localhost:5000/seller/authenticate", {
-        method: "POST",
-        body: JSON.stringify(values),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      console.log(res.status);
-
-      if (res.status === 200) {
-        toast.success("Login Successfull");
-        const data = await res.json();
-        console.log(data);
-        sessionStorage.setItem("seller", JSON.stringify(data));
-        setSellerLoggedIn(true);
-        action.resetForm();
-        router.push("/seller/sellerdashboard");
-      } else if (res.status === 400) {
-        toast.error("Some error occured");
+  const form = useFormik({
+    initialValues: { email: "", password: "" },
+    validationSchema: sellerLoginSchema,
+    onSubmit: async (values, { resetForm }) => {
+      setLoading(true);
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/seller/authenticate`, {
+          method: "POST",
+          body: JSON.stringify(values),
+          headers: { "Content-Type": "application/json" },
+        });
+        if (res.status === 200) {
+          const data = await res.json();
+          sessionStorage.setItem("seller", JSON.stringify(data));
+          setSellerLoggedIn(true);
+          toast.success("Welcome back!");
+          resetForm();
+          router.push("/seller/sellerdashboard");
+        } else {
+          toast.error("Invalid credentials");
+        }
+      } catch {
+        toast.error("Network error");
+      } finally {
+        setLoading(false);
       }
     },
-
-    validationSchema: addSellerSchema,
   });
 
   return (
-    <>
-      {/* component */}
-      {/* Container */}
-      <div
-        className="container-fluid flex items-center justify-center bg-white"
-        style={{ height: "90vh" }}
-      >
-        <div className=" w-3/4 --tw-shadow-color: #000;  ">
-          <div className="grid grid-cols-2 h-3/4">
-            <div className="">
-              <img
-                src={"/seller-login-hero.avif"}
-                alt=""
-                className="px-5 py-4 "
-              />
-            </div>
-            <div>
-              <form onSubmit={addSellerForm.handleSubmit}>
-                <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight  text-black">
-                  Hey Seller, Welcome Back!
-                </h2>
-                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium leading-6  text-black"
-                    >
-                      Email address
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        onChange={addSellerForm.handleChange}
-                        value={addSellerForm.values.email}
-                        autoComplete="email"
-                        required
-                        className="block w-full rounded-md border-0 py-1.5 px-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-white"
-                      />
-                    </div>
-                  </div>
+    <AuthLayout
+      title="Seller Portal"
+      subtitle="Manage your listings, track orders, and grow your business on VOX Market."
+      imageSrc="/seller-login-hero.avif"
+      imageAlt="Seller illustration"
+      isSeller
+    >
+      <h2 className="text-2xl font-black text-gray-900 mb-1">Hey Seller, welcome back!</h2>
+      <p className="text-sm text-gray-500 mb-8">
+        New seller?{" "}
+        <Link href="/sellersignup" className="font-semibold text-[#8C52FF] hover:underline">Register here</Link>
+      </p>
 
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <label
-                        htmlFor="password"
-                        className="block text-sm font-medium leading-6  mt-8 text-black"
-                      >
-                        Password
-                      </label>
-                      <div className="text-sm mt-8">
-                        <a
-                          href="/resetPassword"
-                          className="font-semibold  hover:text-[#D4A056]-500 text-[#FC9B3C] "
-                        >
-                          Forgot password?
-                        </a>
-                      </div>
-                    </div>
-                    <div className="mt-2">
-                      <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        onChange={addSellerForm.handleChange}
-                        value={addSellerForm.values.password}
-                        autoComplete="current-password"
-                        required
-                        className="block w-full rounded-md border-0 py-1.5 px-1.5 text-[#000000] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-[#ffffff]"
-                      />
-                    </div>
-                  </div>
+      <form onSubmit={form.handleSubmit} className="flex flex-col gap-5">
+        <Field label="Email address" id="email" error={form.touched.email && form.errors.email}>
+          <Input id="email" name="email" type="email" placeholder="seller@example.com"
+            onChange={form.handleChange} value={form.values.email} autoComplete="email" />
+        </Field>
 
-                  <div className="mt-10">
-                    <button
-                      type="submit"
-                      className="flex w-full justify-center rounded-md bg-[#FC9B3C] mt-6 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-text-[#D4A056] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
-                      Sign in
-                    </button>
-                  </div>
-                  <div className="text-sm mt-8 text-center">
-                    <a
-                      href="/sellersignup"
-                      className="font-semibold  hover:text-[#D4A056]-500 text-[#FC9B3C] "
-                    >
-                      Yet not register? Register Here!
-                    </a>
-                  </div>
-                </div>
-              </form>
-            </div>
+        <Field label="Password" id="password" error={form.touched.password && form.errors.password}>
+          <div className="relative">
+            <Input id="password" name="password" type={showPw ? "text" : "password"}
+              placeholder="••••••••"
+              onChange={form.handleChange} value={form.values.password}
+              className="pr-10" />
+            <button type="button" onClick={() => setShowPw(v => !v)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+              {showPw ? <FiEyeOff size={16} /> : <FiEye size={16} />}
+            </button>
           </div>
-        </div>
-      </div>
-    </>
+          <div className="flex justify-end">
+            <Link href="/resetPassword" className="text-xs text-[#8C52FF] hover:underline font-semibold">
+              Forgot password?
+            </Link>
+          </div>
+        </Field>
+
+        <SubmitBtn loading={loading}>Sign in</SubmitBtn>
+      </form>
+    </AuthLayout>
   );
 };
 
-export default Sellerlogin;
+export default SellerLogin;

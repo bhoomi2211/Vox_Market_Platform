@@ -1,211 +1,119 @@
 "use client";
+import AuthLayout, { Field, Input, SubmitBtn } from "@/components/AuthLayout";
 import useVoiceContext from "@/context/VoiceContext";
 import { useFormik } from "formik";
-import { useEffect } from "react";
-import SpeechRecognition from "react-speech-recognition";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import * as Yup from "yup";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+
+const signupSchema = Yup.object().shape({
+  fname: Yup.string().required("First name is required"),
+  lname: Yup.string().required("Last name is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string().min(6, "Min 6 characters").required("Password is required"),
+  cpassword: Yup.string()
+    .oneOf([Yup.ref("password")], "Passwords must match")
+    .required("Please confirm password"),
+});
 
 const Signup = () => {
-  const addUserSchema = Yup.object().shape({});
+  const router = useRouter();
+  const [showPw, setShowPw] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { finalTranscript, voiceResponse, resetTranscript } = useVoiceContext();
 
-  const { performActionUsingVoice, fillInputUsingVoice, finalTranscript, voiceResponse, resetTranscript } = useVoiceContext();
-
+  // Voice: basic voice-fill support
   useEffect(() => {
-    if(finalTranscript.includes('take sign up details')) {
-      SpeechRecognition.startListening({ continuous: true });
-      voiceResponse('Please provide me your first name');
+    if (!finalTranscript) return;
+    const t = finalTranscript.toLowerCase();
+    if (t.includes('take sign up details')) {
+      voiceResponse('Please say your first name');
       resetTranscript();
-      if(finalTranscript.includes('first name')) {
-        resetTranscript();
-        setTimeout(() => {
-          addUserForm.setFieldValue('fname', finalTranscript);
-          voiceResponse('Please provide me your last name');
-        }, 5000);
-      }
     }
-  }, [finalTranscript])
+  }, [finalTranscript]);
 
-
-  const addUserForm = useFormik({
-    initialValues: {
-      fname: "",
-      lname: "",
-      email: "",
-      password: "",
-      cpassword: "",
-    },
-
-    onSubmit: async (values, action) => {
-      // values.image = selFile;
-      console.log(values);
-      const res = await fetch("http://localhost:5000/user/add", {
-        method: "POST",
-        body: JSON.stringify(values),
-        headers: { "Content-type": "application/json" },
-      });
-      console.log(res.status);
-      action.resetForm();
-      if (res.status === 200) {
-        toast("SignUp successfully");
-      } else {
-        toast("Something went wrong");
+  const form = useFormik({
+    initialValues: { fname: "", lname: "", email: "", password: "", cpassword: "" },
+    validationSchema: signupSchema,
+    onSubmit: async (values, { resetForm }) => {
+      setLoading(true);
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/add`, {
+          method: "POST",
+          body: JSON.stringify(values),
+          headers: { "Content-Type": "application/json" },
+        });
+        if (res.status === 200) {
+          toast.success("Account created! Please log in.");
+          resetForm();
+          router.push("/login");
+        } else {
+          toast.error("Something went wrong");
+        }
+      } catch {
+        toast.error("Network error");
+      } finally {
+        setLoading(false);
       }
     },
-    validationSchema: addUserSchema,
   });
 
   return (
-    <>
-      <div
-        className="container-fluid flex items-center justify-center bg-purple-50"
-        style={{ height: "100vh" }}
-      >
-        <div className=" w-3/4 --tw-shadow-color: #000;  ">
-          <div className="grid grid-cols-2 h-3/4">
-            <div className="w-full h-auto">
-              <img
-                src="https://www.pngplay.com/wp-content/uploads/6/E-Commerce-Shopping-PNG-Clipart-Background.png"
-                alt=""
-                className="px-5 py-4 "
-              />
-            </div>
-            <div>
-              <form onSubmit={addUserForm.handleSubmit}>
-                <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight  text-black">
-                  Register Here !
-                </h2>
-                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                  <div className="flex flex-wrap">
-                    <div className="w-1/2 pe-2">
-                      <label
-                        htmlFor="name"
-                        className="block text-sm font-medium leading-6  text-black"
-                      >
-                        First Name
-                      </label>
+    <AuthLayout
+      title="Create your account"
+      subtitle="Join VOX Market and enjoy a hands-free, voice-powered shopping experience."
+      imageSrc="https://www.pngplay.com/wp-content/uploads/6/E-Commerce-Shopping-PNG-Clipart-Background.png"
+      imageAlt="Shopping illustration"
+    >
+      <h2 className="text-2xl font-black text-gray-900 mb-1">Register</h2>
+      <p className="text-sm text-gray-500 mb-8">
+        Already have an account?{" "}
+        <Link href="/login" className="font-semibold text-[#8C52FF] hover:underline">Login here</Link>
+      </p>
 
-                      <div className="mt-1">
-                        <input
-                          id="fname"
-                          name="fname"
-                          type="text"
-                          onChange={addUserForm.handleChange}
-                          value={addUserForm.values.fname}
-                          required
-                          className="block w-full rounded-md border-0 py-1.5 px-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-[#ffffff]"
-                        />
-                      </div>
-                    </div>
-                    <div className="w-1/2 ">
-                      <label
-                        htmlFor="name"
-                        className="block text-sm  font-medium leading-6  text-black"
-                      >
-                        Last Name
-                      </label>
-
-                      <div className="mt-1">
-                        <input
-                          id="lname"
-                          name="lname"
-                          type="text"
-                          onChange={addUserForm.handleChange}
-                          value={addUserForm.values.lname}
-                          required
-                          className="block w-full rounded-md border-0 py-1.5 px-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6 bg-[#ffffff]"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm mt-3 font-medium leading-6  text-black"
-                    >
-                      Email address
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        onChange={addUserForm.handleChange}
-                        value={addUserForm.values.email}
-                        autoComplete="email"
-                        required
-                        className="block w-full rounded-md border-0 py-1.5 px-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6 bg-[#ffffff]"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <label
-                        htmlFor="password"
-                        className="block text-sm font-medium leading-6  mt-3 text-black"
-                      >
-                        Password
-                      </label>
-                    </div>
-                    <div className="mt-1">
-                      <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        onChange={addUserForm.handleChange}
-                        value={addUserForm.values.password}
-                        autoComplete="current-password"
-                        required
-                        className="block w-full rounded-md border-0 py-1.5 px-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6 bg-[#ffffff]"
-                      />
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <label
-                        htmlFor="cpassword"
-                        className="block text-sm font-medium leading-6  mt-3 text-black"
-                      >
-                        Confirm Password
-                      </label>
-                    </div>
-                    <div className="mt-1">
-                      <input
-                        id="cpassword"
-                        name="cpassword"
-                        type="password"
-                        onChange={addUserForm.handleChange}
-                        value={addUserForm.values.cpassword}
-                        autoComplete="current-password"
-                        required
-                        className="block w-full rounded-md border-0 py-1.5 px-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6 bg-[#ffffff]"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="mt-10">
-                    <button
-                      type="submit"
-                      className="flex w-full justify-center rounded-md bg-[#FC9B3C] mt-6 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-text-[#D4A056] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
-                      Sign in
-                    </button>
-                  </div>
-                  <div className="text-sm mt-8 text-center">
-                    <a
-                      href="/login"
-                      className="font-semibold  hover:text-[#D4A056]-500 text-[#FC9B3C] "
-                    >
-                      Already register? Login Here!
-                    </a>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
+      <form onSubmit={form.handleSubmit} className="flex flex-col gap-4">
+        <div className="grid grid-cols-2 gap-3">
+          <Field label="First Name" id="fname" error={form.touched.fname && form.errors.fname}>
+            <Input id="fname" name="fname" type="text" placeholder="Jane"
+              onChange={form.handleChange} value={form.values.fname} />
+          </Field>
+          <Field label="Last Name" id="lname" error={form.touched.lname && form.errors.lname}>
+            <Input id="lname" name="lname" type="text" placeholder="Doe"
+              onChange={form.handleChange} value={form.values.lname} />
+          </Field>
         </div>
-      </div>
-    </>
+
+        <Field label="Email address" id="email" error={form.touched.email && form.errors.email}>
+          <Input id="email" name="email" type="email" placeholder="you@example.com"
+            onChange={form.handleChange} value={form.values.email} autoComplete="email" />
+        </Field>
+
+        <Field label="Password" id="password" error={form.touched.password && form.errors.password}>
+          <div className="relative">
+            <Input id="password" name="password" type={showPw ? "text" : "password"}
+              placeholder="Min 6 characters"
+              onChange={form.handleChange} value={form.values.password}
+              className="pr-10" />
+            <button type="button" onClick={() => setShowPw(v => !v)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+              {showPw ? <FiEyeOff size={16} /> : <FiEye size={16} />}
+            </button>
+          </div>
+        </Field>
+
+        <Field label="Confirm Password" id="cpassword" error={form.touched.cpassword && form.errors.cpassword}>
+          <Input id="cpassword" name="cpassword" type="password" placeholder="Repeat password"
+            onChange={form.handleChange} value={form.values.cpassword} />
+        </Field>
+
+        <div className="pt-1">
+          <SubmitBtn loading={loading}>Create Account</SubmitBtn>
+        </div>
+      </form>
+    </AuthLayout>
   );
 };
 

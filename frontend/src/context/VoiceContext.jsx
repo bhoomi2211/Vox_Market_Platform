@@ -215,7 +215,7 @@ export const VoiceProvider = ({ children }) => {
         voicePageNavigator('cheakout')
       }
     },
-    
+
     {
       command: 'open contact page',
       callback: (pageName) => {
@@ -446,7 +446,7 @@ export const VoiceProvider = ({ children }) => {
       router.push('/productView');
     }
   }, [finalTranscript])
-  
+
   const voiceResponse = (text) => {
     speech.text = text;
     window.speechSynthesis.speak(speech);
@@ -500,7 +500,7 @@ export const VoiceProvider = ({ children }) => {
     const voices = synth.getVoices();
     setVoices(voices);
     console.log(voices);
-    speech.voice = voices[5];
+    speech.voice = voices[12];
   }
 
   const checkExistenceInTranscript = (commandArray) => {
@@ -523,7 +523,7 @@ export const VoiceProvider = ({ children }) => {
     }}>
 
       <div className='fixed bottom-6 right-6 flex flex-col items-end gap-2 z-50'>
-        <button 
+        <button
           className='w-12 h-12 rounded-full bg-[#8C52FF] text-white shadow-lg hover:bg-[#7340d3] transition-all duration-200 flex items-center justify-center'
           onClick={() => {
             if (listening) {
@@ -539,7 +539,7 @@ export const VoiceProvider = ({ children }) => {
             <FaMicrophone size={20} />
           )}
         </button>
-        
+
         {/* Transcript display */}
         {listening && transcript && (
           <div className='bg-[#8C52FF]/90 text-white px-4 py-2 rounded-lg max-w-xs text-sm backdrop-blur-sm'>

@@ -5,7 +5,7 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
 
-    const [cartOpen, setCartOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
 
   const cartItemsinSession = JSON.parse(localStorage.getItem("cartItems"));
 
@@ -66,7 +66,7 @@ export const CartProvider = ({ children }) => {
     return cartItems.reduce((acc, item) => acc + item.quantity, 0);
   };
 
-  
+
 
   return (
     <CartContext.Provider
