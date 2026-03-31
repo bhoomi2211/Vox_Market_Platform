@@ -9,6 +9,7 @@ import useVoiceContext from "@/context/VoiceContext";
 import { IconMicrophone, IconShoppingCart, IconSearch, IconX, IconAdjustments } from "@tabler/icons-react";
 import pluralize from "pluralize";
 import { useRouter } from "next/navigation";
+import VoiceCommandsCard from "@/app/VoiceCommandCard";
 
 // ─── Static Data ──────────────────────────────────────────────────────────────
 
@@ -151,6 +152,18 @@ const ProductCard = ({ product, index, addItemToCart, isInCart }) => {
 };
 
 // ─── Main Component ───────────────────────────────────────────────────────────
+
+const commands = [
+  { command: "Hey VOX", description: "Wake up the assistant" },
+  { command: "I want to buy something", description: "View all products" },
+  { command: "Scroll up/down", description: "Navigate the page" },
+  { command: "Move to top/bottom", description: "Jump to page extremes" },
+  { command: "Search for [item]", description: "Search specific items" },
+  { command:"Open sign up page", description:"Navigate sign up page"},
+  { command:"Open login page", description: "Navigate log in page"}
+  
+
+];
 
 const ProductView = () => {
   const router = useRouter();
@@ -573,6 +586,7 @@ const ProductView = () => {
           </main>
         </div>
       </div>
+      <VoiceCommandsCard commands={commands} />
     </div>
   );
 };

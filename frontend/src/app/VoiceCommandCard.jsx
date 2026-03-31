@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
 import { IconCommand, IconChevronUp } from '@tabler/icons-react';
 
-const VoiceCommandsCard = () => {
+const VoiceCommandsCard = ({commands}) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const commands = [
-    { command: "Hey VOX", description: "Wake up the assistant" },
-    { command: "Browse products", description: "View all products" },
-    { command: "Scroll up/down", description: "Navigate the page" },
-    { command: "Move to top/bottom", description: "Jump to page extremes" },
-    { command: "Search for [item]", description: "Search specific items" },
-    { command: "Show categories", description: "View product categories" }
-  ];
+  
 
   return (
     <div 
@@ -37,7 +30,7 @@ const VoiceCommandsCard = () => {
         </button>
         
         <div className={`transition-all duration-300 ${
-          isExpanded ? 'max-h-96' : 'max-h-0'
+          isExpanded ? 'max-h-[70vh]' : 'max-h-0'
         } overflow-hidden`}>
           <div className="p-4 space-y-3">
             {commands.map((cmd, index) => (

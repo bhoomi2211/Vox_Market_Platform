@@ -199,6 +199,15 @@ const CategoryCard = ({ cat }) => (
 
 // ─── Main Page ─────────────────────────────────────────────────────────────────
 
+const commands = [
+  { command: "Hey VOX", description: "Wake up the assistant" },
+  { command: "Start Listening", description: "Wake up the assistant" },
+  { command: "I want to buy something", description: "View all products" },
+  { command: "Scroll up/down", description: "Navigate the page" },
+  { command: "Move to top/bottom", description: "Jump to page extremes" },
+  { command: "Search for [item]", description: "Search specific items" }
+];
+
 const Home = () => {
   return (
     <div className="bg-[#0a0a0f] min-h-screen">
